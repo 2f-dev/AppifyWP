@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="info_menu_item" type="id"/>
+    <item name="cookie_policy_item" type="id"/>
+    <item name="privacy_policy_item" type="id"/>
+    <item name="terms_item" type="id"/>
+</resources>
