@@ -1,5 +1,7 @@
 package com.wbl.app.appifywp.activities;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.core.view.GravityCompat;
@@ -24,7 +26,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.webkit.WebView;
 import java.util.HashMap;
 
@@ -46,8 +47,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
-                R.id.nav_tools, R.id.nav_share, R.id.nav_send)
+                R.id.nav_home)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -91,7 +91,43 @@ public class MainActivity extends AppCompatActivity {
 
         addMenuItemInNavMenuDrawer();
 
+        //Check Intent
+        Intent intent = getIntent();
+        if(intent != null) {
+            Uri uri = intent.getData();
+            if (uri != null) {
+                String url = uri.toString();
+                Fragment fragment = new HomeFragment();
+                Bundle args = new Bundle();
+                args.putString("url", url);
+                fragment.setArguments(args);
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.nav_host_fragment, fragment);
+                ft.commit();
+            }
+        }
     }
+
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        //setIntent(intent);
+        if(intent != null) {
+            Uri uri = intent.getData();
+            if (uri != null) {
+                String url = uri.toString();
+                Fragment fragment = new HomeFragment();
+                Bundle args = new Bundle();
+                args.putString("url", url);
+                fragment.setArguments(args);
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.nav_host_fragment, fragment);
+                ft.commit();
+            }
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

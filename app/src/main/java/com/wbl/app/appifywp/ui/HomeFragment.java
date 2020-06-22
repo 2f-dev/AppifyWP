@@ -12,13 +12,8 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
-import android.widget.TextView;
-
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.wbl.app.appifywp.R;
 
@@ -45,7 +40,6 @@ public class HomeFragment extends Fragment {
         String urlInternal = url;
 
         try {
-            //post = ApiCalls.callGetSinglePost(idPost);
             webViewPost.getSettings().setJavaScriptEnabled(true);
             webViewPost.setWebViewClient(new WebViewClient() {
                 @Override
@@ -89,10 +83,6 @@ public class HomeFragment extends Fragment {
                     webViewPost.setVisibility(View.VISIBLE);
                 }
             });
-
-            /*String postContent = post.getContent().getRendered();
-            postContent = HtmlUtils.replaceImageInHtml(postContent);
-            webViewPost.loadDataWithBaseURL("", postContent, "text/html", "UTF-8", "");*/
 
             webViewPost.loadUrl(url);
 
